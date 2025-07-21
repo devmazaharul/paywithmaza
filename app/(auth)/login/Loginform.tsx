@@ -7,16 +7,16 @@ import Link from 'next/link';
 
 export default function Loginform() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="my-8 p-8 bg-gray-800 rounded-lg shadow-2xl max-w-sm w-full border border-gray-700">
+    <div className=" flex items-center justify-center p-4">
+      <div className="my-8 p-5 bg-gray-800 rounded-lg shadow-2xl max-w-sm w-full border border-gray-700">
         <Topinfo title="Login" desc="Access your account and injoy now" />
 
-        <div className="mb-6">
+        <div className="mb-5">
           <Label
             htmlFor="email"
             className="block text-sm font-medium text-gray-300 mb-2"
           >
-            Email Address <span className='text-red-500'>*</span>
+            Email Address <span className="text-red-500">*</span>
           </Label>
           <Input
             name="email"
@@ -34,7 +34,7 @@ export default function Loginform() {
             htmlFor="password"
             className="block text-sm font-medium text-gray-300 mb-2"
           >
-            Password <span className='text-red-500'>*</span>
+            Password <span className="text-red-500">*</span>
           </Label>
           <Input
             name="password"
@@ -57,18 +57,17 @@ export default function Loginform() {
             href="/register"
             className="text-blue-400 hover:text-blue-300 font-medium transition duration-200"
           >
-            Sign Up
+           Register
           </Link>
         </p>
         <p className="text-center text-sm text-gray-400 mt-2">
-        
           <Link
             href="/reset"
             className="text-blue-400 hover:text-blue-300 font-medium transition duration-200"
           >
             Reset
-          </Link> If You Forget Password
-           
+          </Link>{' '}
+          If You Forget Your Password
         </p>
       </div>
     </div>

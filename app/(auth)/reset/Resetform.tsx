@@ -7,8 +7,8 @@ import Link from 'next/link';
 
 export default function Resetform() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="my-8 p-8 bg-gray-800 rounded-lg shadow-2xl max-w-sm w-full border border-gray-700">
+    <div className=" flex items-center justify-center p-4">
+      <div className="my-8 p-5 bg-gray-800 rounded-lg shadow-2xl max-w-sm w-full border border-gray-700">
         <Topinfo title="Reset" desc="Restore your important account" />
 
         <div className="mb-6">
@@ -35,7 +35,7 @@ export default function Resetform() {
         </Button>
 
         <p className="text-center text-sm text-gray-400 mt-6">
-         Already have an account?{' '}
+         I remembered my password.{' '}
           <Link
             href="/login"
             className="text-blue-400 hover:text-blue-300 font-medium transition duration-200"

@@ -19,7 +19,7 @@ export function AnimatedText({title}:{title:string}) {
           WebkitClipPath: "padding-box",
         }}
       />
-    <BadgeDollarSign color="#7728c6" size={17}/> <hr className="mx-2 h-4 w-px shrink-0 bg-neutral-500" />
+    <BadgeDollarSign color="#7728c6" size={17}/> <hr className="mx-2 h-4 w-px shrink-0 bg-neutral-400" />
       <AnimatedGradientText className="text-sm font-medium">
        {title}
       </AnimatedGradientText>

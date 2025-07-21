@@ -6,11 +6,11 @@ import Link from 'next/link';
 
 export default function Registerform() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="my-8 p-8 bg-gray-800 rounded-lg shadow-2xl max-w-sm w-full border border-gray-700">
+    <div className=" flex items-center justify-center p-4">
+      <div className="my-8 p-5 bg-gray-800 rounded-lg shadow-2xl max-w-sm w-full border border-gray-700">
         <Topinfo title="Register" desc="Create new account and enjoy now" />
 
-        <div className="mb-6">
+        <div className="mb-5">
           <Label
             htmlFor="name"
             className="block text-sm font-medium text-gray-300 mb-2"
@@ -26,7 +26,7 @@ export default function Registerform() {
                        transition duration-200 ease-in-out"
           />
         </div>
-        <div className="mb-6">
+        <div className="mb-5">
           <Label
             htmlFor="email"
             className="block text-sm font-medium text-gray-300 mb-2"
@@ -43,7 +43,7 @@ export default function Registerform() {
                        transition duration-200 ease-in-out"
           />
         </div>
-        <div className="mb-6">
+        <div className="mb-5">
           <Label
             htmlFor="number"
             className="block text-sm font-medium text-gray-300 mb-2"
