@@ -1,4 +1,3 @@
-import Topinfo from "@/app/_components/Topinfo";
 import Loginform from "./Loginform";
 
 export default function page() {

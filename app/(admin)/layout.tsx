@@ -1,6 +1,6 @@
 import Header from "../_components/Header"
 import "../globals.css"
-export default function Authlayout({children}:Readonly<{
+export default function Adminlayout({children}:Readonly<{
   children: React.ReactNode;
 }>) {
   return (
