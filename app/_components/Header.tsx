@@ -43,7 +43,7 @@ export default function Header() {
                 className=" bg-pink-600 cursor-pointer hover:bg-pink-700 text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
                 
               >
-                <Link href={'/login'}>Login</Link>
+                <Link href={'/login'}>Access</Link>
               </Button>
               <Button className="cursor-pointer text-white" variant={'link'}>
                 Get started

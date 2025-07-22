@@ -8,6 +8,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Registerschema } from '@/utils/validation';
+import { http_instance } from '@/http/axios';
+import { httpConfig } from '@/http/http.config';
+import axios from 'axios';
 
 export default function Registerform() {
   type RegisterField = z.infer<typeof Registerschema>;
@@ -20,10 +23,27 @@ export default function Registerform() {
     resolver: zodResolver(Registerschema),
   });
 
-  const onsubmit = async (data: RegisterField) => {
-    console.log(data);
-    //call regiter api
-  };
+
+const onsubmit = async (
+  data: RegisterField
+) => {
+  try {
+    const response = await http_instance.post("/new", data);
+    console.log("Success response:", response.data);
+    alert("Create success")
+  } catch (error: unknown) {
+    // Axios error detect
+    if (axios.isAxiosError(error)) {
+      // API থেকে আসা message থাকলে সেটাকে দেখাও
+      const msg = error.response?.data?.message || error.message || "HTTP request error";
+      setError("root", { message: msg });
+    } else {
+      // অন্য কোনো error হলে generic message
+      setError("root", { message: "An unexpected error occurred" });
+    }
+  }
+};
+
 
   return (
     <div className=" flex items-center justify-center p-4">
