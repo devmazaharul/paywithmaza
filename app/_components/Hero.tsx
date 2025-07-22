@@ -14,8 +14,8 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <main className=" max-h-screen py-10">
-      <section className="md:flex items-center justify-around py-6 space-y-8">
+    <main className="py-10">
+      <section className="md:flex items-center justify-around py-6 space-y-4">
         <div>
         <div className='my-3  w-fit mx-auto md:mx-0'>
             <AnimatedText title="Instant Global Payments" />
@@ -39,13 +39,13 @@ export default function Hero() {
           </div>
           <div className="flex items-center gap-4  md:gap-5 text-gray-400">
             <div className="flex items-center gap-1">
-              <ShieldCheck color='#219be8' size={16} /> Bank-level Security{' '}
+              <ShieldCheck color='#e60076' size={16} /> Bank-level Security{' '}
             </div>
             <div className="flex items-center gap-1">
-              <Earth color='#219be8' size={16} /> Bank-level Security{' '}
+              <Earth color='#e60076' size={16} /> Bank-level Security{' '}
             </div>
-            <div className="flex hidden md:block items-center gap-1">
-              <BatteryCharging  color='#219be8' size={16}/> Instant Transfer{' '}
+            <div className="md:flex hidden md:block items-center gap-1">
+              <BatteryCharging  color='#e60076' size={16}/> Instant Transfer{' '}
             </div>
 
           </div>

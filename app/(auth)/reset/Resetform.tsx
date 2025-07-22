@@ -1,17 +1,34 @@
+'use client'
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import Topinfo from '@/app/_components/Topinfo';
 import Link from 'next/link';
+import { z } from 'zod';
+import { Resetschema } from '@/utils/validation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 export default function Resetform() {
+  type ResetField = z.infer<typeof Resetschema>;
+
+  const {register,formState:{errors,isSubmitting},handleSubmit,setError}=useForm<ResetField>({
+    resolver:zodResolver(Resetschema)
+  })
+
+
+  const onsubmit=async(data:ResetField)=>{
+    console.log(data);
+  }
+  
   return (
     <div className=" flex items-center justify-center p-4">
       <div className="my-8 p-5 bg-gray-800 rounded-lg shadow-2xl max-w-sm w-full border border-gray-700">
         <Topinfo title="Reset" desc="Restore your important account" />
 
-        <div className="mb-6">
+<form onSubmit={handleSubmit(onsubmit)}>
+          <div className="mb-6">
           <Label
             htmlFor="email"
             className="block text-sm font-medium text-gray-300 mb-2"
@@ -19,7 +36,7 @@ export default function Resetform() {
             Email Address <span className='text-red-500'>*</span>
           </Label>
           <Input
-            name="email"
+          {...register("email")}
             id="email"
             placeholder="example@gmail.com"
             type="email"
@@ -27,18 +44,22 @@ export default function Resetform() {
                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                        transition duration-200 ease-in-out"
           />
+              {errors.email && (
+            <p className="text-red-400 pt-1">{errors.email?.message}</p>
+          )}
         </div>
 
  
-        <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105">
+        <Button className="w-full bg-pink-600 cursor-pointer hover:bg-pink-700 text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105 ">
           Reset
         </Button>
+</form>
 
         <p className="text-center text-sm text-gray-400 mt-6">
          I remembered my password.{' '}
           <Link
             href="/login"
-            className="text-blue-400 hover:text-blue-300 font-medium transition duration-200"
+            className="text-pink-400 hover:text-pink-300 font-medium transition duration-200"
           >
             Login
           </Link>

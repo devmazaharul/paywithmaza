@@ -40,8 +40,8 @@ export default function Header() {
           <div>
             <div className="flex items-center gap-5">
               <Button
-                className="cursor-pointer text-black hover:bg-gray-300"
-                variant={'outline'}
+                className=" bg-pink-600 cursor-pointer hover:bg-pink-700 text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+                
               >
                 <Link href={'/login'}>Login</Link>
               </Button>
