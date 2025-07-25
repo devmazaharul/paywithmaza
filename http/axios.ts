@@ -1,4 +1,4 @@
-
+'use client';
 import axios from "axios";
 import { httpConfig } from "./http.config";
 
@@ -8,4 +8,8 @@ export const http_instance=axios.create({
 })
 
 
-
+export const getTransactions = async (url:string) => {
+  const response = await http_instance.get(url);
+  console.log(response.data);
+  return response.data?.items || [];
+};

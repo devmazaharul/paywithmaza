@@ -7,7 +7,7 @@ export default function page() {
   return (
     <div className='w-full '>
       <Toptitle title='Send Money' desc='Transfer funds quickly and securely'/>
-      <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 p-4 items-start'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 md:p-4 p-2 items-start'>
          <div className='md:col-span-2 '>
            <SendmoneyForm />
          </div>
