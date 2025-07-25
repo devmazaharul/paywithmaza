@@ -32,24 +32,24 @@ export default function Whychoose() {
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-10 gap-6">
         <Choosecard
-          icon={<Users className="text-pink-500 text-2xl w-fit mx-auto" />}
+          icon={<Users className="text-yellow-500 text-2xl w-fit mx-auto" />}
           title="10M+"
           tag="Active Users"
         />
         <Choosecard
-          icon={<Earth className="text-pink-500 text-2xl w-fit mx-auto" />}
+          icon={<Earth className="text-indigo-500 text-2xl w-fit mx-auto" />}
           title="200+"
           tag="Countries"
         />
         <Choosecard
           icon={
-            <LockKeyhole className="text-pink-500 text-2xl w-fit mx-auto" />
+            <LockKeyhole className="text-emerald-600 text-2xl w-fit mx-auto" />
           }
           title="99.9%"
           tag="Uptime"
         />
         <Choosecard
-          icon={<Clock className="text-pink-500 text-2xl w-fit mx-auto" />}
+          icon={<Clock className="text-fuchsia-500 text-2xl w-fit mx-auto" />}
           title="<5S"
           tag="Average Transfer Time"
         />
@@ -67,7 +67,7 @@ export default function Whychoose() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 my-10 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 my-10 gap-6">
         <Servicescard
           icon={
             <Send

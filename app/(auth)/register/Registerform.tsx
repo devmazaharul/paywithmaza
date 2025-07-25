@@ -9,7 +9,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Registerschema } from '@/utils/validation';
 import { http_instance } from '@/http/axios';
-import { httpConfig } from '@/http/http.config';
 import axios from 'axios';
 
 export default function Registerform() {

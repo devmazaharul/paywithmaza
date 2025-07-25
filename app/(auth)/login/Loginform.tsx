@@ -9,10 +9,14 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Loginschema } from '@/utils/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { http_instance } from '@/http/axios';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useStore } from '@/hooks/useStore';
 
 export default function Loginform() {
   type LoginField = z.infer<typeof Loginschema>;
-
+  const router=useRouter()
   const {
     register,
     setError,
@@ -22,9 +26,29 @@ export default function Loginform() {
     resolver: zodResolver(Loginschema),
   });
 
-  const onSubmit=async(data:LoginField)=>{
-console.log(data);
+
+  const store= useStore;
+  const onSubmit = async (
+  data: LoginField
+) => {
+  try {
+    const {data:items,status} = await http_instance.post("/access", data,{withCredentials:true});
+    if(status !== 200) {
+      throw new Error("Login failed");
+    }
+     store(items)
+      router.push("/main");
+      alert("Account loged in");
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      const msg = error.response?.data?.message || error.message || "HTTP request error";
+      setError("root", { message: msg });
+    } else {
+      setError("root", { message: "An unexpected error occurred" });
+    }
   }
+};
+
 
 
   return (
