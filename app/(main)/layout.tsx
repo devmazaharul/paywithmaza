@@ -3,6 +3,7 @@ import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from './main/_mainComponets/Sidebar';
 import { Space_Grotesk } from 'next/font/google';
 import QueryProvier from './main/_mainComponets/QueryProvier';
+import SessonProvider from './main/_mainComponets/SessonProvider';
 
 const Font = Space_Grotesk({
   weight: '400',
@@ -20,13 +21,15 @@ export default function Adminlayout({
     <html lang="en">
       <body className={`${Font.className} bg-gray-900 text-white`}>
         <QueryProvier>
-          <SidebarProvider>
+          <SessonProvider>
+            <SidebarProvider>
             <AppSidebar />
             <main className="w-full">
               <SidebarTrigger className="cursor-pointer bg-gray-700 relative top-4" />
               <div className="p-6">{children}</div>
             </main>
           </SidebarProvider>
+          </SessonProvider>
         </QueryProvier>
       </body>
     </html>

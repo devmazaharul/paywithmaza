@@ -13,3 +13,16 @@ export interface Transactions {
   status: 'success' | 'failed' | 'pending';
   typeTitle: string;
 }
+
+
+export interface meType{
+  messgae:string,
+  status:number,
+  item:{
+    name:string,
+    email:string,
+    _id:string,
+    balance:number,
+    role:string,
+  }
+}

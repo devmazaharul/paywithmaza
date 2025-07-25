@@ -5,6 +5,7 @@ import { Transactions } from '@/types/Responce';
 import { getTransactions } from '@/http/axios';
 import { ArrowDownLeft, ArrowUpRight } from 'lucide-react';
 import { format } from 'date-fns';
+import { transactionsDumyData } from '@/data/trData';
 
 type StatusType = 'debit' | 'credit';
 
@@ -38,7 +39,7 @@ export default function TransactionCard() {
         <p className="text-sm text-gray-400">No transactions found.</p>
       )}
 
-      {trxItems.map((trx, index) => (
+      { transactionsDumyData.map((trx, index) => (
         <div
           key={index}
           className="flex items-center justify-between p-4 rounded-xl hover:bg-gray-800 bg-gray-900 text-gray-100 shadow-md border border-gray-800 transition"
