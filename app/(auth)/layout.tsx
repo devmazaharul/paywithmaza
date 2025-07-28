@@ -1,5 +1,7 @@
 import Header from "../_components/Header"
 import "../globals.css"
+import { Toaster } from "@/components/ui/sonner"
+
 export default function Authlayout({children}:Readonly<{
   children: React.ReactNode;
 }>) {
@@ -12,6 +14,7 @@ export default function Authlayout({children}:Readonly<{
               <Header/>
              {children}
            </div>
+           <Toaster position="top-right" />
           </body>
         </html>
   )

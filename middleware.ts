@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/main', request.url));
   }
 
-  // ✅ যদি user logged in না থাকে এবং protected route এ যেতে চায়
+  // // ✅ যদি user logged in না থাকে এবং protected route এ যেতে চায়
   if (!token && pathname.startsWith('/main')) {
     return NextResponse.redirect(new URL('/login', request.url));
   }

@@ -1,36 +1,20 @@
+'use client';
+import { useAuthentication } from '@/store/useAuthentication';
+import { useTransactionList } from '@/store/useTransaction';
 import { History, Users } from 'lucide-react';
 import React from 'react';
 
-const recipients = [
-  {
-    name: 'John Doe',
-    email: 'john@example.com',
-    amount: '$1200',
-    lastAction: 'last sent',
-  },
-  {
-    name: 'Jane Smith',
-    email: 'jane@example.com',
-    amount: '$850',
-    lastAction: 'last sent',
-  },
-  {
-    name: 'Alice Johnson',
-    email: 'alice@example.com',
-    amount: '$1,430',
-    lastAction: 'last sent',
-  },
-];
-
 export default function AdditionalInfo() {
+  const userIno=useAuthentication((state) => state.authenticatedUser);
+  const transInfo=useTransactionList((state) => state.transactions).filter((item)=>item.type=="debit").slice(0,3)
   return (
-    <div className="p-4 border border-gray-800 rounded-2xl shadow-2xl ">
+    <div className="p-3 border border-gray-800 rounded-2xl shadow-2xl ">
       <h1 className="text-lg font-semibold py-2 text-white">Quick Stats</h1>
 
       <div className="space-y-2 text-sm">
         <div className="flex items-center justify-between text-gray-300">
           <span>Available Balance</span>
-          <b className="text-emerald-500 text-base">$45,832.00</b>
+          <b className="text-emerald-500 text-base">${userIno?.item.balance}</b>
         </div>
         <div className="flex items-center justify-between text-gray-300">
           <span>This Month Sent</span>
@@ -48,19 +32,19 @@ export default function AdditionalInfo() {
         </h2>
 
         <div className="mt-2 space-y-3">
-          {recipients.map((recipient, index) => (
+          {transInfo && transInfo.map((recipient, index) => (
             <div
               key={index}
-              className="flex items-center justify-between bg-gray-900 p-3 rounded-lg border border-gray-800 hover:bg-gray-800 transition-all shadow"
+              className="flex gap-2 items-center justify-between bg-gray-900 p-2 rounded-lg border border-gray-800 hover:bg-gray-800 transition-all shadow"
             >
               <div>
-                <p className="font-medium text-white capitalize">{recipient.name}</p>
-                <p className="text-gray-400 text-sm lowercase">{recipient.email}</p>
+                <p className="font-medium text-white capitalize">{recipient.relatedUserID.name}</p>
+                <p className="text-gray-400 text-sm lowercase">{recipient.relatedUserID.email}</p>
               </div>
               <div className="text-right">
-                <p className="font-medium text-white">{recipient.amount}</p>
-                <span className="text-gray-400 flex items-center gap-1 text-sm">
-                  <History size={13} /> {recipient.lastAction}
+                <p className={ `${recipient.type=="debit"?"text-red-500":" text-white"} font-medium`}>${recipient.amount}</p>
+                <span className="text-gray-400 flex items-center  text-sm">
+                  <History size={13} /> {recipient.type}
                 </span>
               </div>
             </div>

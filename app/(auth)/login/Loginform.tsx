@@ -12,6 +12,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { http_instance } from '@/http/axios';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { BadgeCheck } from 'lucide-react';
 
 export default function Loginform() {
   type LoginField = z.infer<typeof Loginschema>;
@@ -28,16 +30,20 @@ export default function Loginform() {
 
   const onSubmit = async (item: LoginField) => {
     try {
-      const { status } = await http_instance.post(
+      const {status}= await http_instance.post(
         '/access',
-        item,
-        { withCredentials: true }
+        item
       );
-      if (status !== 200) {
-        throw new Error('Login failed');
+      if (status === 200) {
+        toast.success('Login successful', {
+          duration: 2000,
+          description: 'You have successfully logged in.',
+          icon: <BadgeCheck className="h-5 w-5 text-pink-500" />
+        });
+       router.push('/main');
       }
-      router.push('/main')
-
+    
+    
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const msg =

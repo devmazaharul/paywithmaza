@@ -1,11 +1,13 @@
 'use client';
-
 import { useQuery } from '@tanstack/react-query';
 import { Transactions } from '@/types/Responce';
 import { getTransactions } from '@/http/axios';
 import { ArrowDownLeft, ArrowUpRight } from 'lucide-react';
 import { format } from 'date-fns';
-import { transactionsDumyData } from '@/data/trData';
+
+import { useAuthentication } from '@/store/useAuthentication';
+import { useEffect } from 'react';
+import { useTransactionList } from '@/store/useTransaction';
 
 type StatusType = 'debit' | 'credit';
 
@@ -15,31 +17,57 @@ const bgColors: Record<StatusType, string> = {
 };
 
 export default function TransactionCard() {
+  const shouldRefetch = true; // toggle from env/context
+
   const {
     data: trxItems = [],
     isLoading,
     isError,
-  } = useQuery<Transactions[]>({
+      } = useQuery<Transactions[]>({
     queryKey: ['transactions'],
-    queryFn: () => getTransactions('/pay/transactions'), 
-    refetchInterval: 20000,
-    staleTime: 0,
+    queryFn: () => getTransactions('/pay/transactions'),
+    staleTime: 0, 
+    refetchInterval:shouldRefetch?1000*60:false
   });
 
   const formatAmount = (amount: number | string) => {
     const parsed = typeof amount === 'string' ? parseFloat(amount) : amount;
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(parsed);
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(parsed);
   };
+
+  const { authenticatedUser } = useAuthentication();
+  const {transactions,setTransactions}=useTransactionList()
+  const balance=authenticatedUser?.item.balance;
+
+
+useEffect(() => {
+  if (JSON.stringify(transactions) !== JSON.stringify(trxItems)) {
+    setTransactions(trxItems);
+  }
+}, [trxItems]);
+
 
   return (
     <div className="space-y-4 my-6">
-      {isLoading && <p className="text-sm text-gray-400">Loading transactions...</p>}
-      {isError && <p className="text-sm text-red-500">Failed to load transactions.</p>}
+      {isLoading && (
+        <p className="text-sm text-gray-400">Loading transactions...</p>
+      )}
+      {isError && (
+        <p className="text-sm text-red-500">Failed to load transactions.</p>
+      )}
       {!isLoading && trxItems.length === 0 && !isError && (
         <p className="text-sm text-gray-400">No transactions found.</p>
       )}
+     
 
-      { transactionsDumyData.map((trx, index) => (
+        <div>
+          <h1>Total balance : <span className={`${Number(balance)>50?"text-emerald-500":"text-red-500"} font-semibold text-xl`}>{balance} BDT</span></h1>
+        </div>
+
+      {trxItems.map((trx, index) => (
         <div
           key={index}
           className="flex items-center justify-between p-4 rounded-xl hover:bg-gray-800 bg-gray-900 text-gray-100 shadow-md border border-gray-800 transition"
@@ -55,9 +83,11 @@ export default function TransactionCard() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-base font-medium">{trx.relatedUserID?.name || 'Unknown User'}</h1>
+                <h1 className="text-base font-medium">
+                  {trx.relatedUserID?.name || 'Unknown User'}
+                </h1>
               </div>
-              <p className="text-sm text-gray-400">{trx.typeTitle}</p>
+              <p className="text-sm capitalize text-gray-400">{trx.type=="credit"?"Received Money":trx.typeTitle}</p>
               <span className="text-xs text-gray-500">
                 {format(new Date(trx.updatedAt), 'PPP p')}
               </span>
@@ -66,7 +96,11 @@ export default function TransactionCard() {
 
           {/* Right */}
           <div className="text-right">
-            <h1 className={`text-base font-semibold ${trx.type === 'debit' ? 'text-red-400' : 'text-green-400'}`}>
+            <h1
+              className={`text-base font-semibold ${
+                trx.type === 'debit' ? 'text-red-400' : 'text-green-400'
+              }`}
+            >
               {formatAmount(trx.amount)}
             </h1>
             <p className="text-sm text-gray-500">{trx.trxID}</p>

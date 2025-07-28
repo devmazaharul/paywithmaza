@@ -65,7 +65,7 @@ export default function Header() {
                 <Link href={'/login'}>Access</Link>
               </Button>
               <Button className="cursor-pointer text-white" variant={'link'}>
-                Get started
+                <Link href={'/register'}> Get started</Link>
               </Button>
             </div>
           </div>

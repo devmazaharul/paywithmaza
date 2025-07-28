@@ -1,22 +1,38 @@
 'use client';
 
 import useAuth from '@/app/__hooks/useAuth';
-import { setItems } from '@/app/__hooks/useStore';
+import { useAuthentication } from '@/store/useAuthentication';
 import React, { useEffect } from 'react';
 
-export default function SessonProvider({ children }: { children: React.ReactNode }) {
-  const { data } = useAuth();
+export default function SessionProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { data, isLoading } = useAuth();
+  const { setAuthenticatedUser } = useAuthentication();
 
   useEffect(() => {
-    if (data?.item) {
-      setItems('hasUser', data);
+    if (data) {
+      setAuthenticatedUser(data);
+    } else {
+      setAuthenticatedUser(null);
     }
-  }, [data]);
+  }, [data, setAuthenticatedUser]);
 
+  // Optional fallback UI
+  if (isLoading) {
+    return (
+      <p className="text-yellow-500 text-center mt-10">⚠️ Reconnecting....</p>
+    );
+  }
+  if (!data?.item) {
+    return (
+      <p className="text-yellow-500 text-center mt-10">
+        ⚠️ No Connection found.
+      </p>
+    );
+  }
 
-  // if (!data?.item) {
-  //   return <p className="text-yellow-500 text-center mt-10">⚠️ No Connection found.</p>;
-  // }
-
-  return <div>{children}</div>;
+  return <>{children}</>;
 }

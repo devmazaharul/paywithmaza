@@ -1,14 +1,10 @@
-'use client'
 import Toptitle from '../_mainComponets/Toptitle';
 import Savetransaction from './Savetransaction';
 import FilterTrx from './FilterTrx';
 import TransactionCard from './TransactionCard';
-import { getItems } from '@/app/__hooks/useStore';
+import Refresh from '../_mainComponets/Refresh';
 
 export default function page() {
-
-  console.log(getItems("hasUser"));
- 
 
 
   return (
@@ -25,9 +21,14 @@ export default function page() {
         <FilterTrx />
       </div>
 
-      <div className='py-4'>
-        <h1 className='text-2xl font-bold tracking-tight text-white'>Transaction History  </h1>
-        <TransactionCard/>
+      <div className="py-4">
+        <div className='flex items-center justify-between'>
+          <h1 className="text-2xl font-bold tracking-tight text-white">
+          Transaction History{' '}
+        </h1>
+      <Refresh/>
+        </div>
+        <TransactionCard />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "../globals.css";
 import Header from "../_components/Header";
+import { Toaster } from "@/components/ui/sonner"
 
 const Font=Space_Grotesk({
   weight: '400',
@@ -30,6 +31,7 @@ export default function RootLayout({
             <Header/>
          {children}
        </div>
+       <Toaster position="top-right" />
       </body>
     </html>
   );

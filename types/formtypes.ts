@@ -4,3 +4,8 @@ export interface Register {
   address:string,
   pin:number
 }
+export interface Sendmoney {
+  email:string,
+  amount:number,
+  message?:string,
+}

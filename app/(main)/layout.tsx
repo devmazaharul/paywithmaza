@@ -4,6 +4,7 @@ import { AppSidebar } from './main/_mainComponets/Sidebar';
 import { Space_Grotesk } from 'next/font/google';
 import QueryProvier from './main/_mainComponets/QueryProvier';
 import SessonProvider from './main/_mainComponets/SessonProvider';
+import { Toaster } from "@/components/ui/sonner"
 
 const Font = Space_Grotesk({
   weight: '400',
@@ -31,6 +32,7 @@ export default function Adminlayout({
           </SidebarProvider>
           </SessonProvider>
         </QueryProvier>
+        <Toaster position='top-center'/>
       </body>
     </html>
   );
