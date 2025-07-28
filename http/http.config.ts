@@ -1,6 +1,6 @@
 export const httpConfig = Object.freeze({
-  protocol: process.env.PROTOCOL || "http",
-  host: process.env.HOST || "18.182.7.88", 
+  protocol: process.env.PROTOCOL || "https",
+  host: process.env.HOST || "mazapay-production.up.railway.app",  //https://mazapay-production.up.railway.app/
   port:  7070,
   endpoient:"api",
   get url() {
