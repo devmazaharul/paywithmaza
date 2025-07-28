@@ -3,7 +3,7 @@ import axios from "axios";
 import { httpConfig } from "./http.config";
 
 export const http_instance=axios.create({
-  baseURL:"httpsmazapay-production.up.railway.app/api",
+  baseURL:"https://mazapay-production.up.railway.app/api",
   withCredentials:true
 })
 
