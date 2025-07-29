@@ -14,8 +14,12 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { BadgeCheck } from 'lucide-react';
+import { httpConfig } from '@/http/http.config';
 
 export default function Loginform() {
+
+   console.log(httpConfig.url);
+
   type LoginField = z.infer<typeof Loginschema>;
   const router = useRouter();
   const {

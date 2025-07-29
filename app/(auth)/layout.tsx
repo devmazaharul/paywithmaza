@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/sonner"
 export default function Authlayout({children}:Readonly<{
   children: React.ReactNode;
 }>) {
+
+ 
   return (
      <html lang="en">
           <body className=" bg-gray-800 text-white" 
