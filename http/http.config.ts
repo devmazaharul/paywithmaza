@@ -1,10 +1,10 @@
 export const httpConfig = Object.freeze({
-  protocol: process.env.PROTOCOL || "http",
-  host: process.env.NEXT_PUBLIC_HOST || "57.181.173.193",  //https://mazapay-production.up.railway.app/
+  protocol: process.env.NEXT_PUBLIC_PROTOCOL || "http",
+  host: process.env.NEXT_PUBLIC_HOST || 'localhost',
   port:  7070,
   endpoient:"api",
   get url() {
-    return `${this.protocol}://${this.host}:${this.port}/${this.endpoient}`;
+    return `${this.protocol}://${this.host}/${this.endpoient}`;
   }
 });
 

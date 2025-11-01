@@ -102,7 +102,7 @@ const [status, setstatus] = useState(false)
         <button
         disabled={isSubmitting}
           type="submit"
-          className="w-fit flex gap-1 cursor-pointer items-center  bg-orange-500/90 hover:bg-orange-600 text-gray-200  py-2 px-4 rounded-md transition-colors"
+          className="w-fit flex gap-1 cursor-pointer items-center  bg-pink-600 hover:bg-pink-700 text-gray-200  py-2 px-4 rounded-md transition-colors"
         >
           {isSubmitting?"sending":"Send Money"} <Send size={19} />
         </button>

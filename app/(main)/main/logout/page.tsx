@@ -16,7 +16,7 @@ export default function Page() {
     await http_instance.post('/logout', {});
     queryclient.clear();
     setAuthenticatedUser(null);
-
+    
     toast.warning('Logout successfully', {
       duration: 2000,
       description: 'You have been logged out successfully.',

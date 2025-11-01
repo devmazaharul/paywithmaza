@@ -21,6 +21,7 @@ export interface meType{
   item:{
     name:string,
     email:string,
+    address:string;
     _id:string,
     balance:number,
     role:string,

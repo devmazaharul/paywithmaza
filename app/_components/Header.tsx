@@ -36,7 +36,7 @@ export default function Header() {
           href={'/'}
           className="text-3xl font-bold tracking-tighter md:text-3xl lg:text-3xl"
         >
-          <AuroraText>Transaction</AuroraText>
+          <AuroraText>mazaPay</AuroraText>
         </Link>
       </div>
 

@@ -13,12 +13,9 @@ import { http_instance } from '@/http/axios';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { BadgeCheck } from 'lucide-react';
-import { httpConfig } from '@/http/http.config';
 
 export default function Loginform() {
 
-   console.log(httpConfig.url);
 
   type LoginField = z.infer<typeof Loginschema>;
   const router = useRouter();
@@ -26,7 +23,7 @@ export default function Loginform() {
     register,
     setError,
     handleSubmit,
-    formState: { errors },
+    formState: { errors,isSubmitting },
   } = useForm<LoginField>({
     resolver: zodResolver(Loginschema),
   });
@@ -41,8 +38,7 @@ export default function Loginform() {
       if (status === 200) {
         toast.success('Login successful', {
           duration: 2000,
-          description: 'You have successfully logged in.',
-          icon: <BadgeCheck className="h-5 w-5 text-pink-500" />
+          description: 'You have successfully logged in.'
         });
        router.push('/main');
       }
@@ -109,8 +105,8 @@ export default function Loginform() {
             )}
           </div>
 
-          <Button className="w-full  bg-pink-600 hover:bg-pink-700 cursor-pointer text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105">
-            Login
+          <Button disabled={isSubmitting} className="w-full  bg-pink-600 hover:bg-pink-700 cursor-pointer text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105">
+            {isSubmitting?"Loading...":"Login"}
           </Button>
         </form>
         <div className=" pt-4  w-full ">

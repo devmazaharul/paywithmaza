@@ -38,3 +38,13 @@ export const SendMoneyschema = z.object({
     .max(50000, 'Amount must be less than 50,000'),
   message: z.string().optional(),
 });
+
+
+export function formatBDT(amount:number) {
+  return new Intl.NumberFormat('bn-BD', {
+    style: 'currency',
+    currency: 'BDT',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount);
+}

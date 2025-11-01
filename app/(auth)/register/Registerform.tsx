@@ -10,6 +10,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Registerschema } from '@/utils/validation';
 import { http_instance } from '@/http/axios';
 import axios from 'axios';
+import { CustomError } from '@/responce/error';
+import { toast } from 'sonner';
 
 export default function Registerform() {
   type RegisterField = z.infer<typeof Registerschema>;
@@ -18,31 +20,33 @@ export default function Registerform() {
     setError,
     formState: { errors, isSubmitting },
     handleSubmit,
+    reset,
   } = useForm<RegisterField>({
     resolver: zodResolver(Registerschema),
   });
 
+  const onsubmit = async (data: RegisterField) => {
+    try {
+      const response = await http_instance.post('/new', data);
+      if (response.status !== 200) throw new CustomError('Somethig went wrong');
+      toast.success('Successfully account create');
 
-const onsubmit = async (
-  data: RegisterField
-) => {
-  try {
-    const response = await http_instance.post("/new", data);
-    console.log("Success response:", response.data);
-    alert("Create success")
-  } catch (error: unknown) {
-    // Axios error detect
-    if (axios.isAxiosError(error)) {
-      // API থেকে আসা message থাকলে সেটাকে দেখাও
-      const msg = error.response?.data?.message || error.message || "HTTP request error";
-      setError("root", { message: msg });
-    } else {
-      // অন্য কোনো error হলে generic message
-      setError("root", { message: "An unexpected error occurred" });
+      reset();
+    } catch (error: unknown) {
+      // Axios error detect
+      if (axios.isAxiosError(error)) {
+        // API থেকে আসা message থাকলে সেটাকে দেখাও
+        const msg =
+          error.response?.data?.message ||
+          error.message ||
+          'HTTP request error';
+        setError('root', { message: msg });
+      } else {
+        // অন্য কোনো error হলে generic message
+        setError('root', { message: 'An unexpected error occurred' });
+      }
     }
-  }
-};
-
+  };
 
   return (
     <div className=" flex items-center justify-center p-4">

@@ -17,7 +17,7 @@ export default function Resetform() {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors,isSubmitting },
     handleSubmit,
     setError,
   } = useForm<ResetField>({
@@ -75,9 +75,9 @@ export default function Resetform() {
             )}
           </div>
 
-          <Button className="w-full bg-pink-600 cursor-pointer hover:bg-pink-700 text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105 ">
-            Reset
-          </Button>
+         <Button disabled={isSubmitting} className="w-full  bg-pink-600 hover:bg-pink-700 cursor-pointer text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105">
+                  {isSubmitting?"Reseting...":"Reset"}
+                </Button>
         </form>
         <div className=" pt-4  w-full ">
           <p className="text-center text-red-400"> {errors.root?.message}</p>
