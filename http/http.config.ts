@@ -3,8 +3,9 @@ export const httpConfig = Object.freeze({
   host: process.env.NEXT_PUBLIC_HOST || 'localhost',
   port:  7070,
   endpoient:"api",
+  apiURL:process.env.NEXT_PUBLIC_APIURL,
   get url() {
-    return `${this.protocol}://${this.host}/${this.endpoient}`;
+    return this.apiURL;
   }
 });
 

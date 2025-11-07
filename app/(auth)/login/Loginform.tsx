@@ -13,125 +13,115 @@ import { http_instance } from '@/http/axios';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { useTokenStore } from '@/store/useToken';
 
 export default function Loginform() {
 
 
-  type LoginField = z.infer<typeof Loginschema>;
-  const router = useRouter();
-  const {
-    register,
-    setError,
-    handleSubmit,
-    formState: { errors,isSubmitting },
-  } = useForm<LoginField>({
-    resolver: zodResolver(Loginschema),
-  });
+    type LoginField = z.infer<typeof Loginschema>;
+    const router = useRouter();
+    const {
+        register,
+        setError,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+    } = useForm<LoginField>({
+        resolver: zodResolver(Loginschema),
+    });
 
+    const onSubmit = async (item: LoginField) => {
+        try {
+            const res = await axios.post('/api/auth/login', item);
+            if (res.status !== 200) throw new Error(res.data);
+            toast.success(res.data.message);
+          
+            router.push('/main');
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+                const msg = error.response?.data?.message || error.message || 'HTTP request error';
+                setError('root', { message: msg });
+            } else {
+                setError('root', { message: 'An unexpected error occurred' });
+            }
+        }
+    };
 
-  const onSubmit = async (item: LoginField) => {
-    try {
-      const {status}= await http_instance.post(
-        '/access',
-        item
-      );
-      if (status === 200) {
-        toast.success('Login successful', {
-          duration: 2000,
-          description: 'You have successfully logged in.'
-        });
-       router.push('/main');
-      }
-    
-    
-    } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        const msg =
-          error.response?.data?.message ||
-          error.message ||
-          'HTTP request error';
-        setError('root', { message: msg });
-      } else {
-        setError('root', { message: 'An unexpected error occurred' });
-      }
-    }
-  };
+    return (
+        <div className=" flex items-center justify-center p-4">
+            <div className="my-8 p-5 bg-gray-800 rounded-lg shadow-2xl max-w-sm w-full border border-gray-700">
+                <Topinfo title="Login" desc="Access your account and injoy now" />
 
-  return (
-    <div className=" flex items-center justify-center p-4">
-      <div className="my-8 p-5 bg-gray-800 rounded-lg shadow-2xl max-w-sm w-full border border-gray-700">
-        <Topinfo title="Login" desc="Access your account and injoy now" />
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-5">
-            <Label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-300 mb-2"
-            >
-              Email Address <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              {...register('email')}
-              id="email"
-              placeholder="example@gmail.com"
-              type="email"
-              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="mb-5">
+                        <Label
+                            htmlFor="email"
+                            className="block text-sm font-medium text-gray-300 mb-2"
+                        >
+                            Email Address <span className="text-red-500">*</span>
+                        </Label>
+                        <Input
+                            {...register('email')}
+                            id="email"
+                            placeholder="example@gmail.com"
+                            type="email"
+                            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400
                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                        transition duration-200 ease-in-out"
-            />
-            {errors.email && (
-              <p className="text-red-400 pt-1">{errors.email?.message}</p>
-            )}
-          </div>
+                        />
+                        {errors.email && (
+                            <p className="text-red-400 pt-1">{errors.email?.message}</p>
+                        )}
+                    </div>
 
-          <div className="mb-8">
-            <Label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-300 mb-2"
-            >
-              Pin <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              {...register('pin')}
-              id="password"
-              type="number"
-              placeholder="Enter your Pin"
-              className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400
+                    <div className="mb-8">
+                        <Label
+                            htmlFor="password"
+                            className="block text-sm font-medium text-gray-300 mb-2"
+                        >
+                            Pin <span className="text-red-500">*</span>
+                        </Label>
+                        <Input
+                            {...register('pin')}
+                            id="password"
+                            type="number"
+                            placeholder="Enter your Pin"
+                            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400
                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
                        transition duration-200 ease-in-out"
-            />
-            {errors.pin && (
-              <p className="text-red-400 pt-1">{errors.pin?.message}</p>
-            )}
-          </div>
+                        />
+                        {errors.pin && <p className="text-red-400 pt-1">{errors.pin?.message}</p>}
+                    </div>
 
-          <Button disabled={isSubmitting} className="w-full  bg-pink-600 hover:bg-pink-700 cursor-pointer text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105">
-            {isSubmitting?"Loading...":"Login"}
-          </Button>
-        </form>
-        <div className=" pt-4  w-full ">
-          <p className="text-center text-red-400"> {errors.root?.message}</p>
+                    <Button
+                        disabled={isSubmitting}
+                        className="w-full  bg-pink-600 hover:bg-pink-700 cursor-pointer text-white font-semibold py-3 rounded-md shadow-lg transition duration-200 ease-in-out transform hover:scale-105"
+                    >
+                        {isSubmitting ? 'Loading...' : 'Login'}
+                    </Button>
+                </form>
+                <div className=" pt-4  w-full ">
+                    <p className="text-center text-red-400"> {errors.root?.message}</p>
+                </div>
+
+                <p className="text-center text-sm text-gray-400 mt-6">
+                    Don&apos;t have an account?{' '}
+                    <Link
+                        href="/register"
+                        className="text-pink-400 hover:text-pink-300 font-medium transition duration-200"
+                    >
+                        Register
+                    </Link>
+                </p>
+                <p className="text-center text-sm text-gray-400 mt-2">
+                    <Link
+                        href="/reset"
+                        className="text-pink-400 hover:text-pink-300 font-medium transition duration-200"
+                    >
+                        Reset
+                    </Link>{' '}
+                    If You Forget Your Password
+                </p>
+            </div>
         </div>
-
-        <p className="text-center text-sm text-gray-400 mt-6">
-          Don&apos;t have an account?{' '}
-          <Link
-            href="/register"
-            className="text-pink-400 hover:text-pink-300 font-medium transition duration-200"
-          >
-            Register
-          </Link>
-        </p>
-        <p className="text-center text-sm text-gray-400 mt-2">
-          <Link
-            href="/reset"
-            className="text-pink-400 hover:text-pink-300 font-medium transition duration-200"
-          >
-            Reset
-          </Link>{' '}
-          If You Forget Your Password
-        </p>
-      </div>
-    </div>
-  );
+    );
 }

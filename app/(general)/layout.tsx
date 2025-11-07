@@ -3,6 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import "../globals.css";
 import Header from "../_components/Header";
 import { Toaster } from "@/components/ui/sonner"
+import Footer from "../_components/Footer";
 
 const Font=Space_Grotesk({
   weight: '400',
@@ -21,6 +22,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
+
   return (
     <html lang="en">
       <body
@@ -30,7 +34,9 @@ export default function RootLayout({
        <div className="w-[90%] mx-auto">
             <Header/>
          {children}
+        
        </div>
+        <Footer/>
        <Toaster position="top-right" />
       </body>
     </html>
