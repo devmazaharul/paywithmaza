@@ -4,6 +4,7 @@ import { http_instance } from '@/http/axios';
 import { useAuthentication } from '@/store/useAuthentication';
 import { useQueryClient } from '@tanstack/react-query';
 import { CheckCircle2Icon, LogOut } from 'lucide-react';
+import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
@@ -13,7 +14,8 @@ export default function Page() {
   const queryclient = useQueryClient();
   const { authenticatedUser, setAuthenticatedUser } = useAuthentication();
   const handlelogout = async () => {
-    await http_instance.post('/logout', {});
+    const cookie=await cookies()
+    cookie.delete("mpay_token")
     queryclient.clear();
     setAuthenticatedUser(null);
     
