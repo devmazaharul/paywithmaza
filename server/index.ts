@@ -17,3 +17,19 @@ export const requestUser = async (url: string): Promise<meType> => {
         await http_instance.get(url)
     ).data;
 };
+
+export const logoutFun=async()=>{
+    try {
+        const cookie=await cookies()
+        cookie.delete("mpay_token")
+        return {
+            status:200,
+            message:"logout successfull"
+        }
+    } catch (error) {
+        return {
+            status:500,
+            message:"Logout faild"
+        }
+    }
+}
