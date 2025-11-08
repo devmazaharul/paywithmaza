@@ -12,8 +12,10 @@ import { http_instance } from '@/http/axios';
 import axios from 'axios';
 import { CustomError } from '@/responce/error';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export default function Registerform() {
+  const router=useRouter()
   type RegisterField = z.infer<typeof Registerschema>;
   const {
     register,
@@ -30,7 +32,7 @@ export default function Registerform() {
       const response = await http_instance.post('/new', data);
       if (response.status !== 200) throw new CustomError('Somethig went wrong');
       toast.success('Successfully account create');
-
+      router.push("/login")
       reset();
     } catch (error: unknown) {
       // Axios error detect
