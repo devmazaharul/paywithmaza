@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import { http_instance } from '@/http/axios';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
 // Data type for API Key
 interface ApiKey {
@@ -142,7 +143,7 @@ export default function ApiKeysPage() {
                   Generate New Key
                 </CardTitle>
                 <CardDescription className="text-gray-400">
-                  Create a new API key for your application or merchant.
+                  Create a new API key for your application or merchant <Link className='text-blue-400' href={"/main/documentation"}>documentation</Link>.
                 </CardDescription>
               </CardHeader>
               <CardContent>
