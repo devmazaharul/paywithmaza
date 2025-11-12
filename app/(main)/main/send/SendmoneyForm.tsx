@@ -23,8 +23,7 @@ const [status, setstatus] = useState(false)
 
       const { status } = await http_instance.post(
               '/pay/send',
-              data,
-              { withCredentials: true }
+              data      
             );
             if (status !== 200) {
               throw new Error('Faild to send money');
