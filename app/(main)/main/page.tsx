@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { toast } from 'sonner';
 import { http_instance } from '@/http/axios';
 import { useTransactionList } from '@/store/useTransaction';
+import { formatBDT } from '@/utils/validation';
 
 
 type resType={
@@ -67,7 +68,7 @@ getApiIno()
             <div className="bg-gray-900 p-4 rounded-lg flex flex-col items-center justify-center shadow-md">
               <CreditCard size={24} className="text-green-400 mb-2" />
               <p className="text-gray-300 text-sm">Balance</p>
-              <p className="text-xl font-bold text-white">{user?.item.balance || 0} BDT</p>
+              <p className="text-xl font-bold text-white">{formatBDT(user?.item.balance || 0)}</p>
             </div>
             <div className="bg-gray-900 p-4 rounded-lg flex flex-col items-center justify-center shadow-md">
               <Zap size={24} className="text-yellow-400 mb-2" />

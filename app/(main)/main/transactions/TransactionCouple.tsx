@@ -8,6 +8,7 @@ import { getTransactions } from '@/http/axios';
 import { Transactions } from '@/types/Responce';
 import { useAuthentication } from '@/store/useAuthentication';
 import { useTransactionList } from '@/store/useTransaction';
+import { formatBDT } from '@/utils/validation';
 
 interface filerType {
   type: string;
@@ -103,7 +104,7 @@ useEffect(() => {
                   Number(balance) > 50 ? 'text-emerald-500' : 'text-red-500'
                 } font-semibold text-xl`}
               >
-                {balance} BDT
+                {formatBDT(balance as number)}
               </span>
             </h1>
           </div>

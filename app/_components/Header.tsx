@@ -80,7 +80,7 @@ export default function Header() {
             <ListCollapse />
           </Button>
 
-          {isOpen && <h1>Hellow </h1>}
+          {isOpen && <h1>Comming soon... </h1>}
         </div>
       </div>
     </div>

@@ -75,7 +75,7 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel className="mb-6">
             <h1 className="text-2xl font-bold tracking-tight text-white">
-              <AuroraText>Transaction</AuroraText>
+              <AuroraText>MazaPay</AuroraText>
             </h1>
           </SidebarGroupLabel>
 

@@ -2,6 +2,7 @@
 import { Transactions } from '@/types/Responce';
 import { ArrowDownLeft, ArrowUpRight } from 'lucide-react';
 import { format } from 'date-fns';
+import { formatBDT } from '@/utils/validation';
 
 type StatusType = 'debit' | 'credit';
 
@@ -15,13 +16,7 @@ export default function TransactionCard({
 }: {
   trxItems: Transactions[];
 }) {
-  const formatAmount = (amount: number | string) => {
-    const parsed = typeof amount === 'string' ? parseFloat(amount) : amount;
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(parsed);
-  };
+
 
   return (
     <div className="space-y-4 my-6">
@@ -61,7 +56,7 @@ export default function TransactionCard({
                 trx.type === 'debit' ? 'text-red-400' : 'text-green-400'
               }`}
             >
-              {formatAmount(trx.amount)}
+              {formatBDT(trx.amount)}
             </h1>
             <p className="text-sm text-gray-500">{trx.trxID}</p>
           </div>
