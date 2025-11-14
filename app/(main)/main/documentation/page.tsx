@@ -8,7 +8,7 @@ const endpoints = [
     id: "create-payment",
     title: "Create Payment",
     method: "POST",
-    path: "https://mazapayserver.onrender.com/api/payments/create",
+    path: process.env.NEXT_PUBLIC_APIURL + "/payment/create",
     description: "Create a payment session and return a payment id or redirect URL.",
     request: {
       headers: ["x-api-key:  <API_KEY>", "Content-Type: application/json"],
