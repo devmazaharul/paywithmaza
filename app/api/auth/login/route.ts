@@ -16,7 +16,7 @@ export const POST = async (req: NextRequest) => {
         }
 
         // ✅ Backend API Call
-        const response = await axios.post('https://mazapayserver.onrender.com/api/access', body);
+        const response = await axios.post(process.env.NEXT_PUBLIC_APIURL+'/access', body);
         
         // Backend return validation
         if (response.status !== 200) {

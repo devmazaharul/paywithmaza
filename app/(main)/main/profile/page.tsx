@@ -115,7 +115,8 @@ useEffect(()=>{
                 <div>
                   <p className="text-sm text-zinc-400">Available balance</p>
                   <p className="text-2xl font-semibold mt-1">
-                    {info.balance}
+              
+                    {formatBDT(info.balance)}
                   </p>
                 </div>
                 <div className="flex  items-end gap-2">
